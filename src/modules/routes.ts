@@ -3,6 +3,7 @@ import type http from 'http'
 import type { FastifyBaseLogger, RouteOptions } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 
+import { getCommentRoutes } from './comments'
 import { getUserRoutes } from './users'
 
 export type Routes = Array<
@@ -26,7 +27,9 @@ export function getRoutes(): {
 } {
   const { routes: userRoutes } = getUserRoutes()
 
+  const { routes: commentRoutes } = getCommentRoutes()
+
   return {
-    routes: [...userRoutes],
+    routes: [...userRoutes, ...commentRoutes],
   }
 }

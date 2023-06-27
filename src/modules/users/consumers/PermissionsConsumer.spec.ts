@@ -5,7 +5,7 @@ import type { AwilixContainer } from 'awilix'
 import { asClass } from 'awilix'
 import type { FastifyInstance } from 'fastify'
 
-import { cleanTables } from '../../../../test/DbCleaner'
+import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
 import { FakeConsumerErrorResolver } from '../../../../test/fakes/FakeConsumerErrorResolver'
 import { waitAndRetry } from '../../../../test/utils/waitUtils'
 import { getApp } from '../../../app'
@@ -68,7 +68,7 @@ describe('PermissionsConsumer', () => {
       )
       diContainer = app.diContainer
 
-      await cleanTables(diContainer.cradle.prisma)
+      await cleanTables(diContainer.cradle.prisma, [DB_MODEL.User])
       await app.diContainer.cradle.permissionsService.deleteAll()
       channel = await app.diContainer.cradle.amqpConnection.createChannel()
       await app.diContainer.cradle.permissionConsumer.start()

@@ -4,7 +4,7 @@ import type { Channel } from 'amqplib'
 import { asClass, Lifetime } from 'awilix'
 import type { FastifyInstance } from 'fastify'
 
-import { cleanTables } from '../../../../test/DbCleaner'
+import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
 import { FakeConsumer } from '../../../../test/fakes/FakeConsumer'
 import { FakeConsumerErrorResolver } from '../../../../test/fakes/FakeConsumerErrorResolver'
 import { waitAndRetry } from '../../../../test/utils/waitUtils'
@@ -41,7 +41,7 @@ describe('PermissionPublisher', () => {
     })
 
     beforeEach(async () => {
-      await cleanTables(diContainer.cradle.prisma)
+      await cleanTables(diContainer.cradle.prisma, [DB_MODEL.User])
       await app.diContainer.cradle.permissionsService.deleteAll()
       channel = await app.diContainer.cradle.amqpConnection.createChannel()
     })

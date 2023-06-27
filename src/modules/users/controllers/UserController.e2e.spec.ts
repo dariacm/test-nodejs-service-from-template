@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { beforeEach, expect } from 'vitest'
 
-import { cleanTables } from '../../../../test/DbCleaner'
+import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
 import { getTestConfigurationOverrides } from '../../../../test/jwtUtils'
 import { getApp } from '../../../app'
 import { generateJwtToken } from '../../../infrastructure/tokenUtils'
@@ -17,7 +17,7 @@ describe('UserController', () => {
     app = await getApp(getTestConfigurationOverrides())
   })
   beforeEach(async () => {
-    await cleanTables(app.diContainer.cradle.prisma)
+    await cleanTables(app.diContainer.cradle.prisma, [DB_MODEL.User])
   })
   afterAll(async () => {
     await app.close()

@@ -1,7 +1,7 @@
 import type { Cradle } from '@fastify/awilix'
 import type { AwilixContainer } from 'awilix'
 
-import { cleanTables } from '../../../../test/DbCleaner'
+import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
 import type { TestContext } from '../../../../test/TestContext'
 import { createTestContext, destroyTestContext } from '../../../../test/TestContext'
 import { TEST_USER_1 } from '../../../../test/fixtures/testUsers'
@@ -12,7 +12,7 @@ describe('UserRepository', () => {
   beforeEach(async () => {
     testContext = createTestContext()
     diContainer = testContext.diContainer
-    await cleanTables(diContainer.cradle.prisma)
+    await cleanTables(diContainer.cradle.prisma, [DB_MODEL.User])
   })
   afterEach(async () => {
     await destroyTestContext(testContext)

@@ -1,10 +1,9 @@
 import type { Cradle } from '@fastify/awilix'
 import type { AwilixContainer } from 'awilix'
 
-import { cleanTables } from '../../../../test/DbCleaner'
+import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
 import type { TestContext } from '../../../../test/TestContext'
 import { createTestContext, destroyTestContext } from '../../../../test/TestContext'
-import { TEST_USER_2 } from '../../../../test/fixtures/testUsers'
 
 describe('CommentRepository', () => {
   let testContext: TestContext
@@ -12,7 +11,7 @@ describe('CommentRepository', () => {
   beforeEach(async () => {
     testContext = createTestContext()
     diContainer = testContext.diContainer
-    await cleanTables(diContainer.cradle.prisma)
+    await cleanTables(diContainer.cradle.prisma, [DB_MODEL.Comment])
   })
   afterEach(async () => {
     await destroyTestContext(testContext)
@@ -29,15 +28,10 @@ describe('CommentRepository', () => {
 
     it('Returns values for existing comments', async () => {
       const { commentRepository } = diContainer.cradle
-      const { userRepository } = diContainer.cradle
-
-      const user = await userRepository.createUser({
-        ...TEST_USER_2,
-      })
 
       const comment = await commentRepository.createComment({
         content: 'test',
-        authorId: user.id,
+        authorId: 123,
       })
 
       const result = await commentRepository.getComments()
@@ -49,20 +43,15 @@ describe('CommentRepository', () => {
   describe('createComment', () => {
     it('Creates comment', async () => {
       const { commentRepository } = diContainer.cradle
-      const { userRepository } = diContainer.cradle
-
-      const user = await userRepository.createUser({
-        ...TEST_USER_2,
-      })
 
       const comment = await commentRepository.createComment({
         content: 'test',
-        authorId: user.id,
+        authorId: 123,
       })
 
       expect(comment).toMatchObject({
         content: 'test',
-        authorId: user.id,
+        authorId: 123,
       })
     })
   })

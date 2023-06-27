@@ -18,6 +18,8 @@ import { pino } from 'pino'
 import { ToadScheduler } from 'toad-scheduler'
 
 import { FakeStoreApiClient } from '../integrations/FakeStoreApiClient'
+import { CommentRepository } from '../modules/comments/repositories/commentRepository'
+import { CommentService } from '../modules/comments/services/CommentService'
 import { PermissionConsumer } from '../modules/users/consumers/PermissionConsumer'
 import { UserDataSource } from '../modules/users/datasources/UserDataSource'
 import { DeleteOldUsersJob } from '../modules/users/jobs/DeleteOldUsersJob'
@@ -212,6 +214,9 @@ export function registerDependencies(
     userRepository: asClass(UserRepository, SINGLETON_CONFIG),
     userService: asClass(UserService, SINGLETON_CONFIG),
 
+    commentRepository: asClass(CommentRepository, SINGLETON_CONFIG),
+    commentService: asClass(CommentService, SINGLETON_CONFIG),
+
     userLoader: asFunction(
       (deps: Dependencies) => {
         const { publisher: notificationPublisher, consumer: notificationConsumer } =
@@ -316,6 +321,9 @@ export interface Dependencies {
   userRepository: UserRepository
   userService: UserService
   userLoader: Loader<User>
+
+  commentRepository: CommentRepository
+  commentService: CommentService
 
   permissionsService: PermissionsService
 

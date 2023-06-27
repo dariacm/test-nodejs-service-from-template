@@ -2,6 +2,7 @@ import type { PrismaClient } from '@prisma/client'
 
 export enum DB_MODEL {
   User = 'user',
+  Comment = 'comment',
 }
 
 export async function cleanTables(prisma: PrismaClient, modelNames: readonly DB_MODEL[]) {

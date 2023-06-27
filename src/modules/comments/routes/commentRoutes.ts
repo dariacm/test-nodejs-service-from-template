@@ -1,6 +1,7 @@
 import type { Routes } from 'src/modules/routes'
 
-import { getComments } from '../controllers/commentController'
+import { createComment, getComments } from '../controllers/commentController'
+import { CREATE_COMMENT_BODY_SCHEMA } from '../schemas/commentSchemas'
 
 export const getCommentRoutes = (): {
   routes: Routes
@@ -12,6 +13,12 @@ export const getCommentRoutes = (): {
         url: '/comments',
         handler: getComments,
         schema: { describe: 'Get comments' },
+      },
+      {
+        method: 'POST',
+        url: '/comments',
+        handler: createComment,
+        schema: { body: CREATE_COMMENT_BODY_SCHEMA, describe: 'Create comments' },
       },
     ],
   }

@@ -18,7 +18,7 @@ import { pino } from 'pino'
 import { ToadScheduler } from 'toad-scheduler'
 
 import { FakeStoreApiClient } from '../integrations/FakeStoreApiClient'
-import { CommentRepository } from '../modules/comments/repositories/CommentRepository'
+import { CommentRepository } from '../modules/comments/repositories/commentRepository'
 import { CommentService } from '../modules/comments/services/CommentService'
 import { PermissionConsumer } from '../modules/users/consumers/PermissionConsumer'
 import { UserDataSource } from '../modules/users/datasources/UserDataSource'

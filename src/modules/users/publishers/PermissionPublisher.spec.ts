@@ -41,7 +41,7 @@ describe('PermissionPublisher', () => {
     })
 
     beforeEach(async () => {
-      await cleanTables(diContainer.cradle.prisma, [DB_MODEL.User])
+      await cleanTables(diContainer.cradle.prisma)
       await app.diContainer.cradle.permissionsService.deleteAll()
       channel = await app.diContainer.cradle.amqpConnection.createChannel()
     })

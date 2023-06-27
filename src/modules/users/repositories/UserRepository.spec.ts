@@ -12,7 +12,7 @@ describe('UserRepository', () => {
   beforeEach(async () => {
     testContext = createTestContext()
     diContainer = testContext.diContainer
-    await cleanTables(diContainer.cradle.prisma, [DB_MODEL.User])
+    await cleanTables(diContainer.cradle.prisma)
   })
   afterEach(async () => {
     await destroyTestContext(testContext)

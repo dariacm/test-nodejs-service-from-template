@@ -1,7 +1,7 @@
 import type { Cradle } from '@fastify/awilix'
 import type { AwilixContainer } from 'awilix'
 
-import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
+import { cleanTables } from '../../../../test/DbCleaner'
 import type { TestContext } from '../../../../test/TestContext'
 import { createTestContext, destroyTestContext } from '../../../../test/TestContext'
 import { TEST_USER_2 } from '../../../../test/fixtures/testUsers'

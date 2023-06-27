@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { beforeEach, expect } from 'vitest'
 
-import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
+import { cleanTables } from '../../../../test/DbCleaner'
 import { getTestConfigurationOverrides } from '../../../../test/jwtUtils'
 import { getApp } from '../../../app'
 import { generateJwtToken } from '../../../infrastructure/tokenUtils'

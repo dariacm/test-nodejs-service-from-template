@@ -4,7 +4,7 @@ import type { Channel } from 'amqplib'
 import { asClass, Lifetime } from 'awilix'
 import type { FastifyInstance } from 'fastify'
 
-import { cleanTables, DB_MODEL } from '../../../../test/DbCleaner'
+import { cleanTables } from '../../../../test/DbCleaner'
 import { FakeConsumer } from '../../../../test/fakes/FakeConsumer'
 import { FakeConsumerErrorResolver } from '../../../../test/fakes/FakeConsumerErrorResolver'
 import { waitAndRetry } from '../../../../test/utils/waitUtils'
